@@ -1,0 +1,14 @@
+services:
+  cofe-moon:
+    container_name: cofe-moon
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NODE_VERSION=24
+    ports:
+      - "3005:3000"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1

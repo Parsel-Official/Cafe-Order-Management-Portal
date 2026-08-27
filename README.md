@@ -1,4 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cafe Moon
+
+MVP سیستم مدیریت سفارش کافه با Next.js و Appwrite self-hosted.
+
+## راه‌اندازی Appwrite
+
+ابتدا مقادیر `.env.local` را بر اساس `.env.example` تنظیم کنید. برای اجرای setup، API key باید دسترسی‌های Databases، Storage و Users را داشته باشد.
+
+```bash
+npm run setup:appwrite
+```
+
+این دستور به‌صورت امن و قابل تکرار، دیتابیس، collectionهای منو/میز/سفارش/تخفیف، indexها، bucket تصاویر منو، ۱۴ میز ثابت با token تصادفی امن و کاربر ادمین را می‌سازد. منابعی که از قبل وجود داشته باشند دوباره ساخته نمی‌شوند.
+
+توکن هر میز هویت ثابت همان میز است و با اجرای دوباره setup تغییر نمی‌کند. در صورت نیاز به تغییر دستی تعداد میزهای seed‌شده، مقدار `APPWRITE_TABLE_COUNT` را تنظیم کنید.
+
+## قرارداد QR و سفارش میز
+
+لینک QR باید به شکل `https://cafemoon.ir/orders/{token}` باشد و فقط token تصادفی را در URL قرار دهد؛ شماره میز در URL استفاده نمی‌شود. مسیر `/orders/[token]` ابتدا token را در `tables` resolve می‌کند و میز غیرفعال یا token نامعتبر را رد می‌کند.
+
+هر میز فقط یک سفارش `active` جاری دارد. باز کردن QR یا اسکن مجدد، وضعیت میز را تغییر نمی‌دهد. اولین ثبت سفارش واقعی سفارش active را می‌سازد و میز را `occupied` می‌کند؛ ثبت‌های بعدی مشتریان همان میز، اقلام را به همان سفارش active اضافه می‌کنند. پس از تسویه، سفارش `settled` می‌شود و میز دوباره `empty` خواهد شد.
+
+اسکریپت از `APPWRITE_ENDPOINT` و `APPWRITE_PROJECT_ID` نیز پشتیبانی می‌کند؛ در صورت نبودن آن‌ها، مقادیر `NEXT_PUBLIC_APPWRITE_ENDPOINT` و `NEXT_PUBLIC_APPWRITE_PROJECT_ID` استفاده می‌شوند.
 
 ## Getting Started
 

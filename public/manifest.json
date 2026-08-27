@@ -1,0 +1,23 @@
+{
+  "name": "وب اپلیکیشن کافه مون",
+  "short_name": "CafeMoon",
+  "description": "وب اپلیکیشن کافه مون - سفارش از طریق منو دیجیتال، تسویه حساب و باشگاه مشتریان",
+  "theme_color": "#644a40",
+  "background_color": "#644a40",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
